@@ -1,7 +1,7 @@
 import Button from './button';
 
 export default class Menu {
-    constructor(app, buttonActions=[], options={}){
+    constructor(container, buttonActions=[], options={}){
         let buttons = [];
         this.buttonWidth = options.buttonWidth||200;
         this.buttonHeight = options.buttonHeight||50;
@@ -21,7 +21,7 @@ export default class Menu {
             }
         }
         for(const button of buttons){
-            app.stage.addChild(button.init);
+            container.addChild(button.init);
         }
         window.addEventListener("resize", () => {
             for(const [i, button] of buttons.entries()){
