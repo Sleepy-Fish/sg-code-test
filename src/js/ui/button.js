@@ -5,6 +5,10 @@ export default class Button {
         this.isHover = false;
         this.callback = callback;
 
+        this.container = new PIXI.Container();
+        this.container.x = options.x||0;
+        this.container.y = options.y||0;
+
         this.plain = options.plainTexture||PIXI.Texture.fromImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOUmPj/PwAFGgKplHdb/wAAAABJRU5ErkJggg==", true);
         this.hover = options.hoverTexture||PIXI.Texture.fromImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNs3/fxPwAHQQM3YEwWdQAAAABJRU5ErkJggg==", true);
         this.click = options.clickTexture||PIXI.Texture.fromImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUS137HwAD6gIpM6FI4wAAAABJRU5ErkJggg==", true);
@@ -13,8 +17,6 @@ export default class Button {
         this.sprite.buttonMode = true;
         this.sprite.interactive = true;
         this.sprite.anchor.set(0.5);
-        this.sprite.x = options.x||0;
-        this.sprite.y = options.y||0;
         this.sprite.width = options.width||10;
         this.sprite.height = options.height||10;
 
@@ -24,16 +26,33 @@ export default class Button {
             .on('pointerupoutside', this.onUp.bind(this))
             .on('pointerover', this.onHover.bind(this))
             .on('pointerout', this.onUnhover.bind(this));
+        
+        var style = new PIXI.TextStyle({
+            fontSize: 16,
+            fill: '#ffffff',
+            fontWeight:'100',
+            dropShadow: true,
+            dropShadowColor: '#000000',
+            dropShadowBlur: 2,
+            dropShadowAngle: Math.PI / 6,
+            dropShadowDistance: 1,
+        });
+        this.text = new PIXI.Text(options.text||'', style);
+        this.text.anchor.set(0.5);
+        this.text.x = this.sprite.x;
+        this.text.y = this.sprite.y;
+
+        this.container.addChild(this.sprite, this.text);
     }
 
     get init(){
-        return this.sprite;
+        return this.container;
     }
     set x(x){
-        this.sprite.x = x;
+        this.container.x = x;
     }
     set y(y){
-        this.sprite.y = y;
+        this.container.y = y;
     }
 
     onDown() {

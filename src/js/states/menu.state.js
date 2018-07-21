@@ -6,9 +6,9 @@ export default class MenuState extends State{
     constructor(app){
         super(app)
         this.menu = new Menu(this.scene,[
-            ()=>{window.game.setState('stack');},
-            ()=>{window.game.setState('text');},
-            ()=>{window.game.setState('fire');},
+            { label: 'Stacking Demo', callback: ()=>{window.game.setState('stack');}},
+            { label: 'Text Image Demo', callback: ()=>{window.game.setState('text');}},
+            { label: 'Fire Demo', callback: ()=>{window.game.setState('fire');}},
         ]);
     }
     run(delta){

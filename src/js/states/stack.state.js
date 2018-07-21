@@ -6,10 +6,6 @@ import Button from '../ui/button'
 export default class StackState extends GameState{
     constructor(app){
         super(app);
-        this.fpsText = new PIXI.Text(app.ticker.FPS.toFixed(8));
-        this.fpsText.x = 80;
-        this.fpsText.y = 5;
-
         this.startingLocation = {x: 100, y: 50};
         this.endingLocation = {x: 30, y: 180};
         this.tweenTime = 2000;
@@ -30,26 +26,27 @@ export default class StackState extends GameState{
             this.cardStack.addChild(card);
         }
         this.goButton = new Button({
-            x:35,
+            text:'Restack',
+            x:45,
             y: 80,
-            width:50,
+            width:70,
             height:40
         },()=>{
             this.restack();
         });
         this.resetButton = new Button({
-            x:35,
+            text: 'Reset',
+            x:45,
             y: 130,
-            width:50,
+            width:70,
             height:40
         },()=>{
             this.reset();
         });
-        this.scene.addChild(this.goButton.init, this.resetButton.init, this.cardStack, this.fpsText);
+        this.scene.addChild(this.goButton.init, this.resetButton.init, this.cardStack);
     }
     run(delta){
         super.run(delta);
-        this.fpsText.text = this.app.ticker.FPS.toFixed(12);
         if(this.restacking){
             PIXI.tweenManager.update();
         }

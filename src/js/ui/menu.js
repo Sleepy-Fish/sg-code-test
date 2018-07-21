@@ -9,14 +9,15 @@ export default class Menu {
         this.xPositioning = options.xPositioning||0.5;
         this.yPositioning = options.yPositioning||0.2;
         for(const [i, buttonAction] of buttonActions.entries()){
-            if(typeof(buttonAction)==='function'){
+            if(typeof(buttonAction.callback)==='function'){
                 buttons.push(
                     new Button({
+                        text: buttonAction.label,
                         x: Math.round(window.innerWidth*this.xPositioning),
                         y: Math.round(window.innerHeight*this.yPositioning)+((this.buttonHeight+this.buttonGutter)*i),
                         width: this.buttonWidth,
                         height: this.buttonHeight,
-                    }, buttonAction)
+                    }, buttonAction.callback)
                 );
             }
         }
