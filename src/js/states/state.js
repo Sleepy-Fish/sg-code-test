@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 
 export default class State {
     constructor(app){
+        this.app = app;
         this.active = false;
         this.scene = new PIXI.Container();
         this.scene.visible = false;

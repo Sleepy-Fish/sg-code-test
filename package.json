@@ -21,6 +21,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "pixi-tween": "^0.2.0",
     "pixi.js": "^4.8.1"
   }
 }
