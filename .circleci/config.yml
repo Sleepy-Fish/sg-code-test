@@ -28,7 +28,7 @@ jobs:
           at: .
       - deploy:
           command: scp -oStrictHostKeyChecking=no -r index.html circleci@sleepy.fish:/var/www/demo.sleepy.fish
-          command: scp -oStrictHostKeyChecking=no -r public/ circleci@sleepy.fish:/var/www/demo.sleepy.fish
+          command: scp -oStrictHostKeyChecking=no -r public/* circleci@sleepy.fish:/var/www/demo.sleepy.fish
 workflows:
   version: 2
   launch:
