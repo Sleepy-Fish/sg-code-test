@@ -1,3 +1,4 @@
 node_modules
 public/assets/**/*.png
 public/js/**/*.js
+.DS_Store
