@@ -51,6 +51,10 @@ export default class StackState extends GameState{
             PIXI.tweenManager.update();
         }
     }
+    activate(){
+        super.activate();
+        this.restack();
+    }
     deactivate(){
         super.deactivate();
         this.reset();
