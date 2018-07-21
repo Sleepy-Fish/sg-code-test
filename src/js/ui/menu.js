@@ -2,7 +2,7 @@ import Button from './button';
 
 export default class Menu {
     constructor(container, buttonActions=[], options={}){
-        let buttons = [];
+        this.buttons = [];
         this.buttonWidth = options.buttonWidth||200;
         this.buttonHeight = options.buttonHeight||50;
         this.buttonGutter = options.buttonGutter||10;
@@ -10,7 +10,7 @@ export default class Menu {
         this.yPositioning = options.yPositioning||0.2;
         for(const [i, buttonAction] of buttonActions.entries()){
             if(typeof(buttonAction.callback)==='function'){
-                buttons.push(
+                this.buttons.push(
                     new Button({
                         text: buttonAction.label,
                         x: Math.round(window.innerWidth*this.xPositioning),
@@ -21,14 +21,19 @@ export default class Menu {
                 );
             }
         }
-        for(const button of buttons){
+        for(const button of this.buttons){
             container.addChild(button.init);
         }
         window.addEventListener("resize", () => {
-            for(const [i, button] of buttons.entries()){
+            for(const [i, button] of this.buttons.entries()){
                 button.x = Math.round(window.innerWidth*this.xPositioning);
                 button.y = Math.round(window.innerHeight*this.yPositioning) + ((this.buttonHeight+this.buttonGutter)*i);
             }
         });
+    }
+    reset(){
+        for(const button of this.buttons){
+            buttons.reset();
+        }
     }
 }

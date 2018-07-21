@@ -55,8 +55,14 @@ export default class Button {
         this.container.y = y;
     }
 
+    reset(){
+        this.isDown = false;
+        this.sprite.texture = this.plain;
+    }
+
     onDown() {
         this.isDown = true;
+        this.isHover = true;
         this.sprite.texture = this.click;
         this.callback();
     }

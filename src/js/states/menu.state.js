@@ -13,6 +13,9 @@ export default class MenuState extends State{
     }
     run(delta){
         super.run(delta);
-
+    }
+    activate(){
+        super.activate();
+        this.menu.reset();
     }
 }

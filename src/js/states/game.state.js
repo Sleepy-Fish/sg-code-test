@@ -23,4 +23,8 @@ export default class GameState extends State {
         super.run(delta);
         this.fpsText.text = this.app.ticker.FPS.toFixed(11);
     }
+    activate(){
+        super.activate();
+        this.backButton.reset();
+    }
 }
