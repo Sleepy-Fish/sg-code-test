@@ -33,7 +33,7 @@ export default class Menu {
     }
     reset(){
         for(const button of this.buttons){
-            buttons.reset();
+            this.buttons.reset();
         }
     }
 }
