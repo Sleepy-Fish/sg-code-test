@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import config from './app-config';
+import loader from './loader'
 import MenuState from './states/menu.state';
 import StackState from './states/stack.state';
 import TextState from './states/text.state';
@@ -16,25 +17,32 @@ window.addEventListener("resize", () => {
 });
 document.body.appendChild(app.view);
 
+loader(setup, progress);
 
-window.game = {
-    states:{
-        menu: new MenuState(app),
-        stack: new StackState(app),
-        text: new TextState(app),
-        fire: new FireState(app),
-    },
-    setState: stateName=>{
-        for(const state in window.game.states){
-            state
-            window.game.states[state].deactivate();
-        }
-        window.game.state = window.game.states[stateName];
-        window.game.states[stateName].activate()
-    },
-    loop: delta => {
-        window.game.state.run(delta);
-    }
+function progress(loader, resource){
+    console.info(`${Math.round(loader.progress)}% Loaded`);
 }
-window.game.setState('menu');
-app.ticker.add(delta=>window.game.loop(delta));
+
+function setup(){
+    window.game = {
+        states:{
+            menu: new MenuState(app),
+            stack: new StackState(app),
+            text: new TextState(app),
+            fire: new FireState(app),
+        },
+        setState: stateName=>{
+            for(const state in window.game.states){
+                state
+                window.game.states[state].deactivate();
+            }
+            window.game.state = window.game.states[stateName];
+            window.game.states[stateName].activate()
+        },
+        loop: delta => {
+            window.game.state.run(delta);
+        }
+    }
+    window.game.setState('menu');
+    app.ticker.add(delta=>window.game.loop(delta));
+}

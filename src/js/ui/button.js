@@ -1,4 +1,6 @@
 import * as PIXI from 'pixi.js';
+import isMobile from 'ismobilejs';
+
 export default class Button {
     constructor(options={}, callback=()=>{console.trace(`No callback set for ${this.constructor.name}`)}){
         this.isDown = false;
@@ -62,7 +64,6 @@ export default class Button {
 
     onDown() {
         this.isDown = true;
-        this.isHover = true;
         this.sprite.texture = this.click;
         this.callback();
     }
@@ -75,18 +76,22 @@ export default class Button {
         }
     }
     onHover() {
-        this.isHover = true;
-        if(this.isDown){
-            return;
+        if(!isMobile.any){
+            this.isHover = true;
+            if(this.isDown){
+                return;
+            }
+            this.sprite.texture = this.hover;
         }
-        this.sprite.texture = this.hover;
     }
     onUnhover() {
-        this.isHover = false;
-        if(this.isDown){
-            return;
+        if(!isMobile.any){
+            this.isHover = false;
+            if(this.isDown){
+                return;
+            }
+            this.sprite.texture = this.plain;
         }
-        this.sprite.texture = this.plain;
     }
 
 }

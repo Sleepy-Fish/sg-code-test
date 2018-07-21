@@ -11,20 +11,14 @@ export default class FireState extends GameState{
         this.flameContainer = new PIXI.particles.ParticleContainer();
         this.sparkContainer = new PIXI.particles.ParticleContainer();
 
-        let loader = PIXI.loader;
+         let fireParticleTextures = [];
         for(let i = 1; i <= 6; i++){
-            loader.add(`fire${i}`, `public/assets/particles/fire/F${i}.png`);
+            fireParticleTextures.push(PIXI.loader.resources[`fire${i}`].texture);
         }
-        this.particleTextures = []
-        loader.load((loader_, resources)=>{
-            for(let i = 1; i <= 6; i++){
-                this.particleTextures.push(resources[`fire${i}`].texture);
-            }
-        })
-        
+
         this.flameEmitter = new PIXI.particles.Emitter(
             this.flameContainer,
-            [],
+            fireParticleTextures,
             flameSettings
         );
         this.sparkEmitter = new PIXI.particles.Emitter(
@@ -32,9 +26,6 @@ export default class FireState extends GameState{
             [PIXI.Texture.WHITE],
             sparkSettings
         );
-        loader.onComplete.add(() => {
-            this.flameEmitter.particleImages = this.particleTextures;
-        });
         this.scene.addChild(this.flameContainer, this.sparkContainer);
         window.addEventListener("resize", () => {
             this.flameEmitter.spawnPos.x = window.innerWidth/2;

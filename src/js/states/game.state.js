@@ -4,7 +4,7 @@ import Button from '../ui/button'
 export default class GameState extends State {
     constructor(app){
         super(app);
-        this.fpsText = new PIXI.Text(app.ticker.FPS.toFixed(11));
+        this.fpsText = new PIXI.Text(Math.round(app.ticker.FPS));
         this.fpsText.x = 100;
         this.fpsText.y = 10;
 
@@ -21,7 +21,7 @@ export default class GameState extends State {
     }
     run(delta){
         super.run(delta);
-        this.fpsText.text = this.app.ticker.FPS.toFixed(11);
+        this.fpsText.text = Math.round(this.app.ticker.FPS);
     }
     activate(){
         super.activate();
