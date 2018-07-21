@@ -51,6 +51,10 @@ export default class StackState extends GameState{
             PIXI.tweenManager.update();
         }
     }
+    deactivate(){
+        super.deactivate();
+        this.reset();
+    }
     restack(){
         if(!this.restacking){
             this.restacking = true;
@@ -85,7 +89,7 @@ export default class StackState extends GameState{
         }
     }
     reset(){
-        clearInterval(this.restackInterval)
+        clearInterval(this.restackInterval);
         for(const [i, card] of this.cardStack.children.entries()){
             card.x = this.startingLocation.x+i;
             card.y = this.startingLocation.y+i;

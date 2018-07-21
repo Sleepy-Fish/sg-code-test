@@ -1,2 +1,3 @@
 node_modules
-public/js
+public/assets/**/*.png
+public/js/**/*.js

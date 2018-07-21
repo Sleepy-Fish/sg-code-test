@@ -1,5 +1,5 @@
 export default (function config(){
     return {
-        backgroundColor: 0xbedea1
+        backgroundColor: 0x3b51ce
     }
 })();
