@@ -27,7 +27,8 @@ jobs:
       - attach_workspace:
           at: .
       - deploy:
-          command: scp -oStrictHostKeyChecking=no -r ./* circleci@sleepy.fish:/var/www/demo.sleepy.fish
+          command: scp -oStrictHostKeyChecking=no -r ./assets/* circleci@sleepy.fish:/var/www/demo.sleepy.fish
+          command: scp -oStrictHostKeyChecking=no -r ./js/* circleci@sleepy.fish:/var/www/demo.sleepy.fish
 workflows:
   version: 2
   launch:
